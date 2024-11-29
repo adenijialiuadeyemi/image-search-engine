@@ -73,14 +73,16 @@ h1 {
 
 .search-result {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 10px;
   column-gap: 10px;
-  width: 90%;
-  margin: 100px auto 50px;
-
+  width: 80%;
+  margin: 40px auto 50px;
 }
 
 .search-result img {
   width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  height: 230px;
 }

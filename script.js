@@ -1,7 +1,8 @@
-const formElem = document.querySelector('.form-container')
-let searchBoxElem = document.querySelector('.search-box')
-const searchButtonElem = document.querySelector('.search-btn')
-let searchResultElem = document.querySelector('.search-btn')
+const formContainer = document.querySelector('.form-container')
+let seacrchBox = document.querySelector('.search-box')
+const searchButton = document.querySelector('.search-btn')
+let searchResult = document.querySelector('.search-result')
+let showMoreButton = document.querySelector('.show-more')
 
 let accessKey = '-iWLP2ImT8Bx5MtrgOhWe5R_Iqy7zhNLGYzgnTRmAdE'
 
@@ -10,17 +11,38 @@ let keyword = ''
 
 
 async function searchImages() {
-  keyword = searchBoxElem.value
+  keyword = seacrchBox.value
   const url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accessKey}&per_page=${12}`
 
   const response = await fetch(url)
   const data = await response.json()
 
-  console.log(data)
+  if (page === 1) {
+    searchResult.innerHTML = ""
+  }
+
+  const results = data.results;
+  results.map((result) => {
+    const imageElem = document.createElement('img')
+    imageElem.src = result.urls['small']
+    const imageLinkElem = document.createElement('a')
+    imageLinkElem.href = result.links['html']
+    imageLinkElem.target = '_blank'
+    imageLinkElem.appendChild(imageElem)
+    searchResult.appendChild(imageLinkElem)
+
+    showMoreButton.style.display = "block"
+  })
 }
 
-formElem.addEventListener('submit', (e) => {
+formContainer.addEventListener('submit', (e) => {
   e.preventDefault()
   page = 1
+  searchImages()
+})
+
+showMoreButton.addEventListener('click', (e) => {
+  e.preventDefault()
+  page += 1
   searchImages()
 })
