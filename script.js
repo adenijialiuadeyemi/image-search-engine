@@ -1,14 +1,12 @@
+import { accessKey } from "./config.js"
+
 const formContainer = document.querySelector('.form-container')
 let seacrchBox = document.querySelector('.search-box')
-const searchButton = document.querySelector('.search-btn')
 let searchResult = document.querySelector('.search-result')
 let showMoreButton = document.querySelector('.show-more')
 
-let accessKey = '-iWLP2ImT8Bx5MtrgOhWe5R_Iqy7zhNLGYzgnTRmAdE'
-
 let page;
 let keyword = ''
-
 
 async function searchImages() {
   keyword = seacrchBox.value
